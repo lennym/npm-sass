@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "sass compilation with npm aware include paths",
   "main": "index.js",
+  "bin": "./bin/npm-sass",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
