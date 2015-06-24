@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var sass = require('../index');
+
+var input = process.argv[2];
+
+sass(input, function (err, result) {
+    if (err) {
+        throw err;
+    } else {
+        process.stdout.write(result.css);
+    }
+})

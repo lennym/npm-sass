@@ -1,0 +1,22 @@
+{
+  "name": "npm-sass",
+  "version": "0.0.0",
+  "description": "sass compilation with npm aware include paths",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lennym/npm-sass.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lennym/npm-sass/issues"
+  },
+  "homepage": "https://github.com/lennym/npm-sass",
+  "dependencies": {
+    "node-sass": "^3.2.0"
+  }
+}
