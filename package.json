@@ -11,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/lennym/npm-sass.git"
   },
-  "author": "",
+  "author": "lennym <hello@lennym.co.uk>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lennym/npm-sass/issues"
