@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/lennym/npm-sass",
   "dependencies": {
+    "argh": "^0.1.4",
+    "camelify": "0.0.2",
     "node-sass": "^3.2.0"
   }
 }
