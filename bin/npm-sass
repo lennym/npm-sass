@@ -18,7 +18,6 @@ var whitelist = [
     'source-map-embed',
     'source-map-root',
     'precision',
-    'importer',
     'functions'
 ];
 var options = {};
