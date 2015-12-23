@@ -1,6 +1,6 @@
 {
   "name": "npm-sass",
-  "version": "0.2.1",
+  "version": "1.0.1",
   "description": "sass compilation with npm aware include paths",
   "main": "index.js",
   "bin": "./bin/npm-sass",
@@ -20,6 +20,8 @@
   "dependencies": {
     "argh": "^0.1.4",
     "camelify": "0.0.2",
+    "findup": "^0.1.5",
+    "glob": "^6.0.1",
     "lodash": "^3.10.1",
     "node-sass": "^3.2.0"
   }
