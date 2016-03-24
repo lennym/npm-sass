@@ -47,7 +47,12 @@ gulp.task('sass', function () {
 
 Imports on npm modules are defined in the usual way in your sass files.
 
-If an imported module contains a `"style"` declaration in its package.json, then this file is imported
+The order in which the importer tries to resolve a package's sass file location is as follows:
+
+ - Path defined in the `"sass"` property in the module's package.json
+ - Path defined in the `"style"` property in the module's package.json
+ - Path defined in the `"main"` property in the module's package.json if the file ends in .sass, .scss, or .css
+ - `./styles.scss`
 
 Example:
 
@@ -55,7 +60,7 @@ Example:
 @import "bootstrap";
 ```
 
-This will import `./node_modules/bootstrap/dist/css/bootstrap.css` since this is [defined in bootstrap's package.json](https://github.com/twbs/bootstrap/blob/master/package.json#L20)
+This will import `./node_modules/bootstrap/dist/css/bootstrap.css` since this is [defined in bootstrap's package.json's `"style"` property](https://github.com/twbs/bootstrap/blob/master/package.json#L21)
 
 If no `"style"` declaration exists in the package.json of the imported module, then sass will attempt to load `./styles.scss` from the root of the module.
 
