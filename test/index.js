@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 const sass = require('../');
+const css = require('css');
 
 const root = path.resolve(__dirname, './test-cases');
 const cases = fs.readdirSync(root);
@@ -28,6 +29,7 @@ cases.forEach((test) => {
 
     it('can compile from code without error', (done) => {
       sass(path.resolve(root, test, './index.scss'), (err, output) => {
+        css.parse(output.css.toString());
         done(err);
       });
     });
@@ -36,6 +38,7 @@ cases.forEach((test) => {
       cp.exec(path.resolve(__dirname, '../bin/npm-sass') + ' index.scss', {
         cwd: path.resolve(root, test)
       }, (err, stdout) => {
+        css.parse(stdout);
         done(err);
       });
     });
