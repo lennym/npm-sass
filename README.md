@@ -72,3 +72,9 @@ Example:
 @import "font-awesome/scss/font-awesome";
 ```
 
+## Testing
+
+A number of (very basic) test cases are defined in [./test/test-cases](./test/test-cases). Any help that can be provided in buidling up test coverage would be much appreciated.
+
+Within each test case, a simple test is applied that the `index.scss` file in each case will successfully compile to valid css. Then any additional tests can be run for that test case, as defined in a test.js file in the test case directory.
+
