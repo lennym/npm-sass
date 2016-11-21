@@ -27,7 +27,7 @@ describe('resolver', function () {
     it('resolves the correct path', function () {
       var resolve = resolver(fakeRequire);
 
-      var result = resolve('package-name/specific-file-in-package');
+      var result = resolve(path.join('package-name', 'specific-file-in-package'));
 
       assert.equal(path.join('a', 'b', 'c', 'package-name', 'specific-file-in-package'), result);
     });

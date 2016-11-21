@@ -1,19 +1,18 @@
-var Package = require('../../lib/resolver/package');
 var sinon = require('sinon');
 var assert = require('assert');
+var path = require('path');
+
+var Package = require('../../lib/resolver/package');
 
 describe('Package', function () {
-  var subject;
-
   describe('#json', function () {
     it('returns the package.json file for the package', function () {
       var requireStub = sinon.stub();
+      var subject = new Package('test-package', requireStub);
       var result;
 
       requireStub.withArgs('test-package/package.json')
         .returns('the package.json object');
-
-      subject = new Package('test-package', requireStub);
 
       result = subject.json();
 
@@ -24,15 +23,13 @@ describe('Package', function () {
 
   describe('#resolve', function () {
     it('resolves a path that is local to the package', function () {
-      var requireMock = {
-        resolve: sinon.stub()
-      };
+      var requireMock = { resolve: sinon.stub() };
+      var subject = new Package('test-package', requireMock);
+      var result;
 
       requireMock.resolve.withArgs('test-package/given-path').returns('npm resolved path');
 
-      var subject = new Package('test-package', requireMock);
-
-      var result = subject.resolve('given-path');
+      result = subject.resolve('given-path');
 
       assert.equal(result, 'npm resolved path');
       assert(requireMock.resolve.calledWith('test-package/given-path'));
@@ -41,33 +38,31 @@ describe('Package', function () {
 
   describe('#safeResolve', function () {
     it('resolves a path that is local to the package (but does not error out if it cannot find it)', function () {
-      var requireMock = {
-        resolve: sinon.stub()
-      };
-
-      requireMock.resolve.withArgs('test-package/package.json').returns('/a/b/c/test-package/package.json');
-
+      var requireMock = { resolve: sinon.stub() };
       var subject = new Package('test-package', requireMock);
+      var result;
 
-      var result = subject.safeResolve('given-path');
+      requireMock.resolve.withArgs('test-package/package.json')
+        .returns(path.join('a', 'b', 'c', 'test-package', 'package.json'));
 
-      assert.equal(result, '/a/b/c/test-package/given-path');
+      result = subject.safeResolve('given-path');
+
+      assert.equal(result, path.join('a', 'b', 'c', 'test-package', 'given-path'));
     });
   });
 
   describe('#dir', function () {
     it('returns the directory of the package', function () {
-      var requireMock = {
-        resolve: sinon.stub()
-      };
-
-      requireMock.resolve.withArgs('test-package/package.json').returns('/a/b/c/test-package/package.json');
-
+      var requireMock = { resolve: sinon.stub() };
       var subject = new Package('test-package', requireMock);
+      var result;
 
-      var result = subject.dir();
+      requireMock.resolve.withArgs('test-package/package.json')
+        .returns(path.join('a', 'b', 'c', 'test-package', 'package.json'));
 
-      assert.equal(result, '/a/b/c/test-package');
+      result = subject.dir();
+
+      assert.equal(result, path.join('a', 'b', 'c', 'test-package'));
     });
   });
 
