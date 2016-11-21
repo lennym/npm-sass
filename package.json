@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "./bin/npm-sass",
   "scripts": {
-    "test": "mocha test/index.js"
+    "test": "NODE_PATH=$NODE_PATH:\"$(git rev-parse --show-toplevel)/test/fixtures/node_modules\" mocha test/index.js"
   },
   "repository": {
     "type": "git",
