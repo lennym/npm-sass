@@ -5,7 +5,8 @@
   "main": "index.js",
   "bin": "./bin/npm-sass",
   "scripts": {
-    "test": "NODE_PATH=$NODE_PATH:\"$(git rev-parse --show-toplevel)/test/fixtures/node_modules\" mocha test/index.js"
+    "test": "NODE_PATH=$NODE_PATH:\"$(git rev-parse --show-toplevel)/test/fixtures/node_modules\" mocha test/index.js",
+    "unit-test": "mocha test/units/*.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "css": "^2.2.1",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.6"
   }
 }
