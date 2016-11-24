@@ -9,14 +9,24 @@ const css = require('css');
 const root = path.resolve(__dirname, './test-cases');
 const cases = fs.readdirSync(root);
 
-before((done) => {
-  cp.exec('npm install', { cwd: path.resolve(__dirname, 'fixtures') }, (err) => {
-    done(err);
-  });
-});
-
 cases.forEach((test) => {
+  let hasPackageJson;
+
+  try {
+    hasPackageJson = require(path.resolve(root, test, './package.json'));
+  } catch (e) {}
+
   describe(test, () => {
+    before((done) => {
+      if (hasPackageJson) {
+        cp.exec('npm install', { cwd: path.resolve(root, test) }, (err) => {
+          done(err);
+        });
+      } else {
+        done();
+      }
+    });
+
     it('can compile from code without error', (done) => {
       sass(path.resolve(root, test, './index.scss'), (err, output) => {
         css.parse(output.css.toString());
