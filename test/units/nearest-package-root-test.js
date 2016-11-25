@@ -6,7 +6,7 @@ var fixturesPath = path.resolve.bind(null,
   __dirname,
   '..',
   'fixtures',
-  'nearest-modules-root-fixtures'
+  'nearest-package-root-test'
 )
 
 describe('nearestPackageRoot', function () {

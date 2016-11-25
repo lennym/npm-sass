@@ -1,35 +1,37 @@
 var assert = require('assert');
 var path = require('path');
 
-var resolver = require('../../lib/resolver');
+var resolve = require('../../lib/resolver');
+
+var fixturePath = path.resolve.bind(
+  null,
+  __dirname,
+  '..',
+  'fixtures',
+  /* Re-use package-test fixutres */
+  'package-test'
+);
 
 describe('resolver', function () {
-  var fakeRequire = function (_sassImportPath) {
-    // Simulate package.json
-    return { sass: 'index.scss' };
-  };
-
-  fakeRequire.resolve = function (sassImportPath) {
-    return path.join('a', 'b', 'c', sassImportPath);
-  };
-
   describe('entrypoint import', function () {
     it('resolves the entrypoint path', function () {
-      var resolve = resolver(fakeRequire);
+      var result = resolve(
+        'test-package',
+        fixturePath('index.scss')
+      );
 
-      var result = resolve('package-name');
-
-      assert.equal(path.join('a', 'b', 'c', 'package-name', 'index.scss'), result);
+      assert.equal(result, fixturePath('node_modules', 'test-package', 'test-package-entrypoint.scss'));
     });
   });
 
   describe('non entrypoint import', function () {
     it('resolves the correct path', function () {
-      var resolve = resolver(fakeRequire);
+      var result = resolve(
+        path.join('test-package', 'specific-file-in-package'),
+        fixturePath('index.scss')
+      );
 
-      var result = resolve(path.join('package-name', 'specific-file-in-package'));
-
-      assert.equal(path.join('a', 'b', 'c', 'package-name', 'specific-file-in-package'), result);
+      assert.equal(result, fixturePath('node_modules', 'test-package', 'specific-file-in-package'));
     });
   })
 });
