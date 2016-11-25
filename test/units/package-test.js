@@ -1,4 +1,3 @@
-var sinon = require('sinon');
 var assert = require('assert');
 var path = require('path');
 
