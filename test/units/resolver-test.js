@@ -15,20 +15,22 @@ var fixturePath = path.resolve.bind(
 describe('resolver', function () {
   describe('entrypoint import', function () {
     it('resolves the entrypoint path', function (done) {
-      resolve('test-package', fixturePath('index.scss'), function (err, result) {
+      resolve('test-package', fixturePath('index.scss')).then(function (result) {
         assert.equal(result, fixturePath('node_modules', 'test-package', 'test-package-entrypoint.scss'));
-        done();
-      });
+      })
+      .then(done)
+      .catch(done);
     });
   });
 
   describe('non entrypoint import', function () {
     it('resolves the correct path', function (done) {
       var importPath = path.join('test-package', 'specific-file-in-package');
-      resolve(importPath, fixturePath('index.scss'), function (err, result) {
+      resolve(importPath, fixturePath('index.scss')).then(function (result) {
         assert.equal(result, fixturePath('node_modules', 'test-package', 'specific-file-in-package'));
-        done();
-      });
+      })
+      .then(done)
+      .catch(done);
     });
   });
 });
