@@ -10,13 +10,19 @@ var fixturesPath = path.resolve.bind(null,
 )
 
 describe('nearestPackageRoot', function () {
-  it('finds the nearest module folder based on the import origin', function () {
-    var result = nearestPackageRoot(fixturesPath('index.scss'), 'test-module');
+  it('finds the nearest module folder based on the import origin', function (done) {
+    var sourcePath = fixturesPath('index.scss');
+    nearestPackageRoot('test-module', sourcePath, function (err, result) {
+      assert.equal(result, fixturesPath('node_modules', 'test-module'));
+      done();
+    });
+  });
 
-    assert.equal(result, fixturesPath('node_modules', 'test-module'));
-
-    var result2 = nearestPackageRoot(fixturesPath('node_modules', 'test-module', 'index.scss'), 'nested-module');
-
-    assert.equal(result2, fixturesPath('node_modules', 'test-module', 'node_modules', 'nested-module'));
+  it('works with nested dependencies', function (done) {
+    var sourcePath = fixturesPath('node_modules', 'test-module', 'index.scss');
+    nearestPackageRoot('nested-module', sourcePath, function (err, result) {
+      assert.equal(result, fixturesPath('node_modules', 'test-module', 'node_modules', 'nested-module'));
+      done();
+    });
   });
 });

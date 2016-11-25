@@ -14,7 +14,7 @@ describe('Package', function () {
     );
 
     it('returns the full path to the entrypoint file', function () {
-      var subject = new Package('test-package', fixturePath('index.scss'));
+      var subject = new Package(fixturePath('node_modules', 'test-package'));
       var result = subject.fullPathToEntrypoint();
 
       /* entrypoint file comes from test-package/package.json */
