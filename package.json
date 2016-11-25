@@ -4,9 +4,14 @@
   "description": "sass compilation with npm aware include paths",
   "main": "index.js",
   "bin": "./bin/npm-sass",
+  "config": {
+    "integration-test-files": "test/index.js",
+    "unit-test-files": "test/units/*.js"
+  },
   "scripts": {
-    "test": "NODE_PATH=$NODE_PATH:\"$(git rev-parse --show-toplevel)/test/fixtures/node_modules\" mocha test/index.js",
-    "unit-test": "mocha test/units/*.js"
+    "test": "mocha $npm_package_config_{unit_test_files,integration_test_files}",
+    "unit-test": "mocha $npm_package_config_unit_test_files",
+    "integration-test": "mocha $npm_package_config_integration_test_files"
   },
   "repository": {
     "type": "git",
