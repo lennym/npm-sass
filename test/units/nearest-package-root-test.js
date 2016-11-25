@@ -14,15 +14,17 @@ describe('nearestPackageRoot', function () {
     var sourcePath = fixturesPath('index.scss');
     nearestPackageRoot('test-module', sourcePath).then(function (result) {
       assert.equal(result, fixturesPath('node_modules', 'test-module'));
-      done();
-    });
+    })
+    .then(done)
+    .catch(done);
   });
 
   it('works with nested dependencies', function (done) {
     var sourcePath = fixturesPath('node_modules', 'test-module', 'index.scss');
     nearestPackageRoot('nested-module', sourcePath).then(function (result) {
       assert.equal(result, fixturesPath('node_modules', 'test-module', 'node_modules', 'nested-module'));
-      done();
-    });
+    })
+    .then(done)
+    .catch(done);
   });
 });
