@@ -9,7 +9,7 @@
     "unit-test-files": "test/units/*.js"
   },
   "scripts": {
-    "test": "mocha $npm_package_config_{unit_test_files,integration_test_files}",
+    "test": "mocha $npm_package_config_unit_test_files $npm_package_config_integration_test_files",
     "unit-test": "mocha $npm_package_config_unit_test_files",
     "integration-test": "mocha $npm_package_config_integration_test_files"
   },
