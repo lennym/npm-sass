@@ -4,8 +4,14 @@
   "description": "sass compilation with npm aware include paths",
   "main": "index.js",
   "bin": "./bin/npm-sass",
+  "config": {
+    "integration-test-files": "test/index.js",
+    "unit-test-files": "test/units/*.js"
+  },
   "scripts": {
-    "test": "mocha test/index.js"
+    "test": "mocha $npm_package_config_unit_test_files $npm_package_config_integration_test_files",
+    "unit-test": "mocha $npm_package_config_unit_test_files",
+    "integration-test": "mocha $npm_package_config_integration_test_files"
   },
   "repository": {
     "type": "git",
@@ -19,6 +25,7 @@
   "homepage": "https://github.com/lennym/npm-sass",
   "dependencies": {
     "argh": "^0.1.4",
+    "bluebird": "^3.4.6",
     "camelify": "0.0.2",
     "findup": "^0.1.5",
     "glob": "^6.0.1",
