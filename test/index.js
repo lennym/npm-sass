@@ -11,9 +11,14 @@ const cases = fs.readdirSync(root);
 
 cases.forEach((test) => {
   let hasPackageJson;
+  let settings = {}
 
   try {
     hasPackageJson = require(path.resolve(root, test, './package.json'));
+  } catch (e) {}
+
+  try {
+    settings = require(path.resolve(root, test, './test-settings.json'));
   } catch (e) {}
 
   describe(test, () => {
@@ -28,6 +33,9 @@ cases.forEach((test) => {
     });
 
     it('can compile from code without error', (done) => {
+      if (settings && settings.programmatic === false) {
+        return done();
+      }
       sass(path.resolve(root, test, './index.scss'), (err, output) => {
         css.parse(output.css.toString());
         done(err);
@@ -35,6 +43,9 @@ cases.forEach((test) => {
     });
 
     it('can compile from cli without error', (done) => {
+      if (settings && settings.cli === false) {
+        return done();
+      }
       cp.exec(path.resolve(__dirname, '../bin/npm-sass') + ' index.scss', {
         cwd: path.resolve(root, test)
       }, (err, stdout) => {
