@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var sass = require('../index'),
-    _ = require('lodash'),
     camelify = require('camelify'),
     argh = require('argh').argv;
 
