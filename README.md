@@ -72,6 +72,35 @@ Example:
 @import "font-awesome/scss/font-awesome";
 ```
 
+## Options
+
+An additional `options` parameter can be passed to the npm-sass function to define options that are passed through to [node-sass](http://npmjs.com/package/node-sass).
+
+
+```javascript
+require('npm-sass')('./assets/sass/app.scss', { indentWidth: 4 }, function (err, result) {
+    ...
+});
+```
+
+## Aliases
+
+When using npm-sass programmatically you can also define an alias mapping which will can map particular import paths to other values. This is useful for cases where the exact files to import might be derived from configuration.
+
+For example, the code below will convert `@import "$$theme"` to `$import "my-theme"` before resolving.
+
+```javascript
+const options = {
+  theme: 'my-theme'
+};
+const aliases = {
+  '$$theme': options.theme
+};
+require('npm-sass')('./assets/sass/app.scss', { aliases }, function (err, result) {
+    ...
+});
+```
+
 ## Testing
 
 A number of (very basic) test cases are defined in [./test/test-cases](./test/test-cases). Any help that can be provided in buidling up test coverage would be much appreciated.
