@@ -9,9 +9,9 @@
     "unit-test-files": "test/units/*.js"
   },
   "scripts": {
-    "test": "mocha $npm_package_config_unit_test_files $npm_package_config_integration_test_files",
-    "unit-test": "mocha $npm_package_config_unit_test_files",
-    "integration-test": "mocha $npm_package_config_integration_test_files"
+    "test": "npm run unit-test && npm run integration-test",
+    "unit-test": "mocha $npm_package_config_unit_test_files --timeout 10000",
+    "integration-test": "mocha $npm_package_config_integration_test_files --timeout 10000"
   },
   "repository": {
     "type": "git",
