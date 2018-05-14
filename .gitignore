@@ -33,3 +33,4 @@ npm-debug.log*
 
 # Vim swap files
 *.sw[pon]
+test/**/package-lock.json
