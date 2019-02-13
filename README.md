@@ -59,6 +59,11 @@ Example:
 ```sass
 @import "bootstrap";
 ```
+Or the Webpack syntax:
+
+```sass
+@import "~bootstrap";
+```
 
 This will import `./node_modules/bootstrap/dist/css/bootstrap.css` since this is [defined in bootstrap's package.json's `"style"` property](https://github.com/twbs/bootstrap/blob/master/package.json#L21)
 
