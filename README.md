@@ -74,7 +74,7 @@ Example:
 
 ## Options
 
-An additional `options` parameter can be passed to the npm-sass function to define options that are passed through to [node-sass](http://npmjs.com/package/node-sass).
+An additional `options` parameter can be passed to the npm-sass function to define options that are passed through to [sass](http://npmjs.com/package/sass).
 
 
 ```javascript
@@ -106,4 +106,3 @@ require('npm-sass')('./assets/sass/app.scss', { aliases }, function (err, result
 A number of (very basic) test cases are defined in [./test/test-cases](./test/test-cases). Any help that can be provided in buidling up test coverage would be much appreciated.
 
 Within each test case, a simple test is applied that the `index.scss` file in each case will successfully compile to valid css. Then any additional tests can be run for that test case, as defined in a test.js file in the test case directory.
-
